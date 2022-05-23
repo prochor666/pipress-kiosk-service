@@ -1,0 +1,13 @@
+{
+    "name": "Pipress",
+    "full_name": "Pipress kiosk service",
+    "version": "1.0",
+    "timezone": "UTC",
+    "api": {
+        "url": "https://packages.warp.rocks/ym"
+    },
+    "storage": {
+        "web_media_dir": "/home/pi/pipress-kiosk/media",
+        "local_temp_dir": "temp"
+    }
+}
