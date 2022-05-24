@@ -43,18 +43,18 @@ def filter_media(web_data_dir, remote):
             local_size = os.path.getsize(f"{web_data_dir}/{item}")
 
             if file_basename not in remote['files']:
-                print(f"Remove {item} from local, not used anymore")
+                print(f"Remove {item}, not used anymore")
                 os.remove(f"{web_data_dir}/{item}")
             else:
 
                 if file_basename in remote['files'] and local_size != remote['files'][item]['size']:
                     print(
-                        f"Remove {item} from local {remote['files'][item]['size']} == {local_size}, bad size")
+                        f"Remove {item}, size remote: {remote['files'][item]['size']}/local: {local_size} and download again, size changed")
                     os.remove(f"{web_data_dir}/{item}")
 
                 if file_basename in remote['files'] and local_size == remote['files'][item]['size']:
                     print(
-                        f"Remove {item} from remote, same file {remote['files'][item]['size']} == {local_size}, same size")
+                        f"No change on {item}, size remote: {remote['files'][item]['size']}/local: {local_size}, same file/size")
                     remote['files'].pop(item)
 
     download_new_media(web_data_dir, remote)
@@ -64,7 +64,7 @@ def download_new_media(web_data_dir, remote):
 
     for remote_file, data in remote['files'].items():
 
-        print(f"Download {remote['url']}/{data['basename']} from API")
+        print(f"Download {data['basename']} from API")
         core.download_file(
             f"{remote['url']}/{data['basename']}", f"{web_data_dir}/{data['basename']}")
 

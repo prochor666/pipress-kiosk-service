@@ -8,5 +8,3 @@ compat.check_version()
 api.sync(conf)
 
 core.report()
-
-print('Ok, synced')

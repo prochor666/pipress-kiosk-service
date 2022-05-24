@@ -6,6 +6,7 @@ import psutil
 import platform
 import os
 import sys
+import json
 
 try:
     import RPi.GPIO
@@ -16,6 +17,7 @@ except (RuntimeError, ModuleNotFoundError):
     fake_rpigpio.utils.install()
 
     device = 'fake-pi'
+
 
 root_dir = os.path.dirname(os.path.abspath(sys.modules['__main__'].__file__))
 
@@ -73,7 +75,7 @@ def report():
     r['disk_percent'] = psutil.disk_usage('/')[3]
     r['boot_time'] = psutil.boot_time()
 
-    print(r)
+    print(json.dumps(r, indent = 4))
     # api('mac-report/?mac='+mac()+'&report='+json.dumps(r))
 
 
