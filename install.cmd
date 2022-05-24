@@ -28,6 +28,7 @@ IF %ERRORLEVEL% NEQ 0 (
     EXIT /B 0
 ) ELSE (
     pip install psutil
+    pip install passlib
     pip install websocket
     pip install websocket-client
     pip install requests

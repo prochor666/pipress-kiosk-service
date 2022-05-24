@@ -33,6 +33,7 @@ fi
 if [[ -x "$PYTHON" ]] & [[ -x "$PIP" ]];
 then
     pip install psutil
+    pip install passlib
     pip install websocket
     pip install websocket-client
     pip install requests
@@ -53,13 +54,13 @@ Description=Pipress data sync service
 After=network.target
 [Service]
 User=root
-WorkingDirectory=/opt/pipress-kiosk-sync
-ExecStart=/opt/pipress-kiosk-sync/sync.sh
+WorkingDirectory=/opt/pipress-kiosk-service
+ExecStart=/opt/pipress-kiosk-service/sync.sh
 Restart=always
 [Install]
 WantedBy=multi-user.target
-" > /etc/systemd/system/pipress-kiosk-sync.service
+" > /etc/systemd/system/pipress-kiosk-service.service
 
-sudo systemctl enable pipress-kiosk-sync
-sudo systemctl start pipress-kiosk-sync
-sudo systemctl status pipress-kiosk-sync
+sudo systemctl enable pipress-kiosk-service
+sudo systemctl start pipress-kiosk-service
+sudo systemctl status pipress-kiosk-service

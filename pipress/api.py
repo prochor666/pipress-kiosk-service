@@ -64,7 +64,7 @@ def download_new_media(web_data_dir, remote):
 
     for remote_file, data in remote['files'].items():
 
-        print(f"Download {data['basename']} from API")
+        print(f"Download new {data['basename']} from API")
         core.download_file(
             f"{remote['url']}/{data['basename']}", f"{web_data_dir}/{data['basename']}")
 

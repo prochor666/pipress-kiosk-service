@@ -46,15 +46,15 @@ def file_save(file, content=' '):
     fh = open(file, 'w')
     fh.write(content)
     fh.close()
-    return True
 
 
 def download_file(file_name_remote, file_name_local):
     r = requests.get(file_name_remote, stream=True)
     if r.status_code == 200:
-        with open(file_name_local, 'wb') as f:
+        with open(file_name_local, 'wb') as fh:
             for chunk in r.iter_content(1024):
-                f.write(chunk)
+                fh.write(chunk)
+            fh.close()
 
 
 def refresh_browser():
