@@ -18,6 +18,9 @@ def sync(conf):
     local_json_dir = core.check_dir(
         f"{web_data_dir}/json")
 
+    core.check_dir(
+        f"{web_data_dir}/media")
+
     if isinstance(data, dict) and 'status' in data and data['status'] == True and 'layout' in data and isinstance(data['layout'], dict):
 
         if 'data' in data['layout'] and isinstance(data['layout'], dict) and 'lang' in data:
@@ -28,7 +31,7 @@ def sync(conf):
             if 'media' in data['layout']['data'] and isinstance(data['layout']['data']['media'], dict):
 
                 filter_media(
-                    web_data_dir, data['layout']['data']['media'])
+                    f"{web_data_dir}/media", data['layout']['data']['media'])
 
                 # core.refresh_browser()
 
@@ -62,7 +65,7 @@ def filter_media(web_data_dir, remote):
 
 def download_new_media(web_data_dir, remote):
 
-    for remote_file, data in remote['files'].items():
+    for data in remote['files']:
 
         print(f"Download new {data['basename']} from API")
         core.download_file(
