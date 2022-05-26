@@ -11,9 +11,9 @@ def sync(conf):
         f"{core.root_dir}/{conf['storage']['local_temp_dir']}")
 
     if core.device == 'pi':
-        web_data_dir = f"{conf['storage']['web_data_dir']}"
+        web_data_dir = f"{conf['storage']['web_data_dir_prod']}"
     else:
-        web_data_dir = local_temp_dir
+        web_data_dir = f"{conf['storage']['web_data_dir_dev']}"
 
     local_json_dir = core.check_dir(
         f"{web_data_dir}/json")

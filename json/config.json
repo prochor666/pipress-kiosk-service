@@ -7,7 +7,8 @@
         "url": "https://packages.warp.rocks/ym"
     },
     "storage": {
-        "web_data_dir": "/home/pi/pipress-kiosk/public/media",
-        "local_temp_dir": "../pipress-kiosk/public"
+        "web_data_dir_prod": "/var/www/pipress-kiosk/public/media",
+        "web_data_dir_dev": "../pipress-kiosk/public",
+        "local_temp_dir": "temp"
     }
 }
