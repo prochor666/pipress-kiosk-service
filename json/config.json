@@ -8,6 +8,6 @@
     },
     "storage": {
         "web_data_dir": "/home/pi/pipress-kiosk/public/media",
-        "local_temp_dir": "temp"
+        "local_temp_dir": "../pipress-kiosk/public"
     }
 }
