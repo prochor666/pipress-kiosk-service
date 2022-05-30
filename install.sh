@@ -49,14 +49,19 @@ then
 fi
 
 
-sudo echo "[Unit]
-Description=Pipress data sync service
+# Service installer into /opt
+
+echo "
+[Unit]
+Description=Pipress kiosk communication service
 After=network.target
+
 [Service]
 User=root
 WorkingDirectory=/opt/pipress-kiosk-service
-ExecStart=/opt/pipress-kiosk-service/sync.sh
+ExecStart=sync.sh
 Restart=always
+
 [Install]
 WantedBy=multi-user.target
 " > /etc/systemd/system/pipress-kiosk-service.service

@@ -34,11 +34,20 @@ def sync(conf):
                 f"{local_json_dir}/device.json", json.dumps(data))
             # core.refresh_browser()
 
+            if 'commands' in data:
+
+                return data['commands']
+
     else:
 
         if os.path.isfile(f"{local_json_dir}/device.json"):
 
             os.remove(f"{local_json_dir}/device.json")
+
+    return {
+        'commands': '',
+    }
+
 
 
 def filter_media(web_data_dir, remote):
