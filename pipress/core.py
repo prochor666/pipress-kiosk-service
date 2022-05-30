@@ -9,7 +9,7 @@ import sys
 import json
 
 try:
-    import RPi.GPIO
+    import RPi.GPIO as GPIO
 
     device = 'pi'
 except (RuntimeError, ModuleNotFoundError):

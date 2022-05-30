@@ -49,7 +49,31 @@ then
 fi
 
 
-# Service installer into /opt
+
+# Sensor service installer into /opt
+
+sudo echo "
+[Unit]
+Description=Pipress kiosk sensor service
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt/pipress-kiosk-service
+ExecStart=/usr/bin/python /opt/pipress-kiosk-service/sense.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+" > /etc/systemd/system/pipress-kiosk-sensor.service
+
+sudo systemctl enable pipress-kiosk-sensor
+sudo systemctl start pipress-kiosk-sensor
+sudo systemctl status pipress-kiosk-sensor
+
+
+
+# Data service installer into /opt
 
 sudo echo "
 [Unit]
