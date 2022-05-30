@@ -6,5 +6,5 @@ do
     python3 api_sync.py
 
     # sleep for n minutes
-    sleep 60*5
+    sleep 60
 done
