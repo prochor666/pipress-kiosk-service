@@ -32,16 +32,16 @@ fi
 
 if [[ -x "$PYTHON" ]] & [[ -x "$PIP" ]];
 then
-    pip install psutil
-    pip install passlib
-    pip install websocket
-    pip install websocket-client
-    pip install requests
-    pip install fake-rpigpio
+    sudo pip install psutil
+    sudo pip install passlib
+    sudo pip install websocket
+    sudo pip install websocket-client
+    sudo pip install requests
+    sudo pip install fake-rpigpio
 
     if [[ ! -d temp ]];
     then
-        mkdir -p logs
+        sudo mkdir -p temp
         echo "Created directory /temp created"
     else
         echo "Directory /temp exists"
@@ -51,7 +51,7 @@ fi
 
 # Service installer into /opt
 
-echo "
+sudo echo "
 [Unit]
 Description=Pipress kiosk communication service
 After=network.target
@@ -59,7 +59,7 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=/opt/pipress-kiosk-service
-ExecStart=sync.sh
+ExecStart=/opt/pipress-kiosk-service/sync.sh
 Restart=always
 
 [Install]
