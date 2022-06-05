@@ -33,6 +33,7 @@ IF %ERRORLEVEL% NEQ 0 (
     pip install websocket-client
     pip install requests
     pip install fake-rpigpio
+    pip install urllib3
 
     IF exist temp (
         echo Directory /temp exists

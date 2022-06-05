@@ -3,6 +3,7 @@ import requests
 import uuid
 import re
 import psutil
+import urllib3
 import platform
 import os
 import sys
@@ -49,12 +50,38 @@ def file_save(file, content=' '):
 
 
 def download_file(file_name_remote, file_name_local):
+
+    http = urllib3.PoolManager()
+    r = http.request(
+        'GET', file_name_remote, preload_content=False)
+
+    if r.status == 200:
+
+        with open(file_name_local, 'wb') as f:
+
+            for chunk in r.stream(32768):
+
+                f.write(chunk)
+                f.flush()
+                os.fsync(f.fileno())
+
+            f.close()
+
+"""
     r = requests.get(file_name_remote, stream=True)
     if r.status_code == 200:
-        with open(file_name_local, 'wb') as fh:
+        with open(file_name_local, 'wb') as f:
+
             for chunk in r.iter_content(1024):
-                fh.write(chunk)
-            fh.close()
+
+                if not chunk:
+                    break
+
+                f.write(chunk)
+                f.flush()
+                os.fsync(f.fileno())
+
+            f.close() """
 
 
 def refresh_browser():
