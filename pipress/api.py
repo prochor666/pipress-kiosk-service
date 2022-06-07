@@ -34,9 +34,12 @@ def sync(conf):
                 f"{local_json_dir}/device.json", json.dumps(data))
             # core.refresh_browser()
 
-            if 'commands' in data:
+            if 'command_script' in data:
 
-                return data['commands']
+                return {
+                    'command_script': data['command_script'],
+                    'csid': data['csid'],
+                }
 
     else:
 
@@ -45,7 +48,8 @@ def sync(conf):
             os.remove(f"{local_json_dir}/device.json")
 
     return {
-        'commands': [],
+        'command_script': '',
+        'csid': 0
     }
 
 
@@ -59,9 +63,6 @@ def filter_media(web_data_dir, remote):
         file_basename = os.path.basename(item)
         if os.path.isfile(f"{web_data_dir}/{file_basename}"):
 
-            local_size = os.path.getsize(f"{web_data_dir}/{item}")
-
-            #if file_basename not in remote['files']:
             search = search_file(file_basename, remote['files'])
 
             if search == -1:
@@ -70,17 +71,16 @@ def filter_media(web_data_dir, remote):
                 os.remove(f"{web_data_dir}/{item}")
             else:
 
-                if search > -1 and local_size != remote['files'][search]['size']:
+                if search > -1 and remote['files'][search]['size'] > 0:
                     print(
-                        f"Remove {item}, size remote: {remote['files'][search]['size']}/local: {local_size} and download again, size changed")
+                        f"No change {item}, size: {remote['files'][search]['size']}")
+                    new_files.append(remote['files'][search])
+                    remote['files'].pop(search)
 
+                else:
+                    print(
+                        f"Bad file {item} data, size: {remote['files'][search]['size']}, removing")
                     os.remove(f"{web_data_dir}/{item}")
-                    new_files.append(remote['files'][search])
-
-                if search > -1 and local_size == remote['files'][search]['size']:
-                    print(
-                        f"No change on {item}, size remote: {remote['files'][search]['size']}/local: {local_size}, same file/size")
-                    new_files.append(remote['files'][search])
                     remote['files'].pop(search)
 
     download_new_media(web_data_dir, remote)
@@ -103,7 +103,7 @@ def download_new_media(web_data_dir, remote):
     for data in remote['files']:
 
         print(f"Download new {data['basename']} from API")
-        core.download_file(
+        core.file_download(
             f"{remote['url']}/{data['basename']}", f"{web_data_dir}/{data['basename']}")
 
 

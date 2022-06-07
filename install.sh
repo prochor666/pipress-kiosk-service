@@ -36,16 +36,17 @@ fi
 
 if [[ -x "$PYTHON" ]] & [[ -x "$PIP" ]];
 then
-    sudo pip install psutil
-    sudo pip install passlib
-    sudo pip install websocket
-    sudo pip install websocket-client
-    sudo pip install requests
-    sudo pip install fake-rpigpio
+    pip install psutil
+    pip install passlib
+    pip install websocket
+    pip install websocket-client
+    pip install requests
+    pip install fake-rpigpio
+    pip install urllib3
 
     if [[ ! -d temp ]];
     then
-        sudo mkdir -p temp
+        mkdir -p temp
         echo "Created directory /temp created"
     else
         echo "Directory /temp exists"
@@ -54,7 +55,7 @@ fi
 
 # Sensor service installer into /opt
 
-sudo echo "
+echo "
 [Unit]
 Description=Pipress kiosk sensor service
 After=network.target
@@ -71,7 +72,7 @@ WantedBy=multi-user.target
 
 # Data service installer into /opt
 
-sudo echo "
+echo "
 [Unit]
 Description=Pipress kiosk communication service
 After=network.target
@@ -88,8 +89,8 @@ WantedBy=multi-user.target
 
 # Run services
 
-#sudo systemctl enable pipress-kiosk-sensor
-#sudo systemctl start pipress-kiosk-sensor
+#systemctl enable pipress-kiosk-sensor
+#systemctl start pipress-kiosk-sensor
 
-#sudo systemctl enable pipress-kiosk-service
-#sudo systemctl start pipress-kiosk-service
+#systemctl enable pipress-kiosk-service
+#systemctl start pipress-kiosk-service

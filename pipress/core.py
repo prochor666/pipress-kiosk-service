@@ -44,12 +44,12 @@ def os_command(command):
 
 
 def file_save(file, content=' '):
-    fh = open(file, 'w')
-    fh.write(content)
-    fh.close()
+    f = open(file, 'w')
+    f.write(content)
+    f.close()
 
 
-def download_file(file_name_remote, file_name_local):
+def file_download(file_name_remote, file_name_local):
 
     http = urllib3.PoolManager()
     r = http.request(
