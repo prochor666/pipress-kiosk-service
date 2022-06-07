@@ -1,4 +1,4 @@
-from subprocess import call
+import subprocess
 import requests
 import uuid
 import re
@@ -40,7 +40,7 @@ def reboot():
 
 
 def os_command(command):
-    call(command, shell=True)
+    subprocess.run(command, shell=True)
 
 
 def file_save(file, content=' '):
@@ -86,7 +86,7 @@ def download_file(file_name_remote, file_name_local):
 
 def refresh_browser():
     os_command(
-        'export XAUTHORITY=/home/pi/.Xauthority; export DISPLAY=:0; xdotool getactivewindow key ctrl+F5')
+        'export XAUTHORITY=/home/ym/.Xauthority; export DISPLAY=:0; xdotool getactivewindow key ctrl+F5')
 
 
 def report():

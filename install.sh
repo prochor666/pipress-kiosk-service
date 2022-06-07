@@ -1,6 +1,10 @@
 #!/bin/bash
 
-echo "Pipress service installer"
+echo "Pipress service installer" > install.log
+
+# Logging
+exec > >(tee -a install.log) 2>&1
+
 
 PYTHON="$(which python3)"
 PIP="$(which pip)"
@@ -48,8 +52,6 @@ then
     fi
 fi
 
-
-
 # Sensor service installer into /opt
 
 sudo echo "
@@ -66,12 +68,6 @@ Restart=always
 [Install]
 WantedBy=multi-user.target
 " > /etc/systemd/system/pipress-kiosk-sensor.service
-
-sudo systemctl enable pipress-kiosk-sensor
-sudo systemctl start pipress-kiosk-sensor
-sudo systemctl status pipress-kiosk-sensor
-
-
 
 # Data service installer into /opt
 
@@ -90,6 +86,10 @@ Restart=always
 WantedBy=multi-user.target
 " > /etc/systemd/system/pipress-kiosk-service.service
 
-sudo systemctl enable pipress-kiosk-service
-sudo systemctl start pipress-kiosk-service
-sudo systemctl status pipress-kiosk-service
+# Run services
+
+#sudo systemctl enable pipress-kiosk-sensor
+#sudo systemctl start pipress-kiosk-sensor
+
+#sudo systemctl enable pipress-kiosk-service
+#sudo systemctl start pipress-kiosk-service

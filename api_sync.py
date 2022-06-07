@@ -13,6 +13,10 @@ if len(commands) > 0:
 
     for command in commands:
 
-        core.os_command(command)
+        if core.device == 'pi':
 
+            core.os_command(command)
 
+        if core.device == 'fake-pi':
+
+            print(command)

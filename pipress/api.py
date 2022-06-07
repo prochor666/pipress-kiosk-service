@@ -45,7 +45,7 @@ def sync(conf):
             os.remove(f"{local_json_dir}/device.json")
 
     return {
-        'commands': '',
+        'commands': [],
     }
 
 
