@@ -87,10 +87,35 @@ Restart=always
 WantedBy=multi-user.target
 " > /etc/systemd/system/pipress-kiosk-service.service
 
+# System wide updater
+
+cp /opt/pipress-kiosk-service/system-update.sh /opt/system-update.sh
+dos2unix /opt/system-update.sh
+chmod +x /opt/system-update.sh
+
+echo "
+[Unit]
+Description=Pipress kiosk updater service
+After=network.target
+
+[Service]
+User=root
+WorkingDirectory=/opt
+ExecStart=/opt/system-update.sh
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+" > /etc/systemd/system/pipress-kiosk-system-update.service
+
+
 # Run services
 
-#systemctl enable pipress-kiosk-sensor
-#systemctl start pipress-kiosk-sensor
+systemctl enable pipress-kiosk-sensor
+systemctl start pipress-kiosk-sensor
 
-#systemctl enable pipress-kiosk-service
-#systemctl start pipress-kiosk-service
+systemctl enable pipress-kiosk-service
+systemctl start pipress-kiosk-service
+
+systemctl enable pipress-kiosk-system-update
+systemctl start pipress-kiosk-system-update
