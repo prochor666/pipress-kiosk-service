@@ -6,6 +6,7 @@
     "api": {
         "url": "https://packages.warp.rocks/ym"
     },
+    "sensor": false,
     "storage": {
         "web_data_dir_prod": "/var/www/html",
         "web_data_dir_dev": "../pipress-kiosk/public",

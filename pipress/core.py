@@ -89,7 +89,7 @@ def refresh_browser():
         'export XAUTHORITY=/home/ym/.Xauthority; export DISPLAY=:0; xdotool getactivewindow key ctrl+F5')
 
 
-def report():
+def report(conf):
     r = {'device': device}
     r['system'], r['node'], r['release'], r['version'], r['machine'], r['processor'] = platform.uname()
     r['version_parsed'] = r['version'].split('-')[0]
@@ -101,6 +101,7 @@ def report():
     r['disk_free'] = psutil.disk_usage('/')[2]
     r['disk_percent'] = psutil.disk_usage('/')[3]
     r['boot_time'] = psutil.boot_time()
+    r['sensor'] = conf['sensor']
 
     print(json.dumps(r, indent = 4))
     # api('mac-report/?mac='+mac()+'&report='+json.dumps(r))

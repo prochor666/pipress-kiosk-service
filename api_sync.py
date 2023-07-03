@@ -12,4 +12,4 @@ remote_command = api.sync(conf)
 commands.watch(remote_command)
 
 # Report to API
-core.report()
+core.report(conf)
