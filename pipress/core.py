@@ -103,8 +103,9 @@ def report(conf):
     r['boot_time'] = psutil.boot_time()
     r['sensor'] = conf['sensor']
 
-    print(json.dumps(r, indent = 4))
+    # print(json.dumps(r, indent = 4))
     # api('mac-report/?mac='+mac()+'&report='+json.dumps(r))
+    return r
 
 
 def debug(s):

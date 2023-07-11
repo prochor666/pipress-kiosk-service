@@ -4,7 +4,8 @@
     "version": "1.0",
     "timezone": "UTC",
     "api": {
-        "url": "https://packages.warp.rocks/ym"
+        "url": "https://packages.warp.rocks/ym",
+        "url_prod": "http://archon.test:7007" 
     },
     "sensor": false,
     "storage": {

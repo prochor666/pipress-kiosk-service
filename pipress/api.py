@@ -6,6 +6,7 @@ from pipress import core
 
 def sync(conf):
     data = api_get(conf, f"/device?mac={core.mac()}")
+    #new_data = api_post(conf, f"/device?mac={core.mac()}")
 
     local_temp_dir = core.check_dir(
         f"{core.root_dir}/{conf['storage']['local_temp_dir']}")
@@ -106,12 +107,33 @@ def download_new_media(web_data_dir, remote):
             f"{remote['url']}/{data['basename']}", f"{web_data_dir}/{data['basename']}")
 
 
+def api_post(conf, path, data):
+    try:
+        # print(f"DUMPED {json.dumps(json.loads(conf), indent = 4)}")
+        cstr = json.dumps(conf, indent = 4)
+        #print(f"SERVER CONFIG {cstr}")
+        print(f"API POST {conf['api']['url_prod']}{path}")
+        r = requests.post(
+            f"{conf['api']['url_prod']}{path}", json.dumps(data), {
+                "Cache-Control": "no-cache",
+                "Pragma": "no-cache"
+        })
+        j = r.json()
+    except:
+        j = {
+            'status': False
+        }
+    finally:
+        pass
+    return j
+
+
 def api_get(conf, path):
     try:
         # print(f"DUMPED {json.dumps(json.loads(conf), indent = 4)}")
         cstr = json.dumps(conf, indent = 4)
-        print(f"SERVER CONFIG {cstr}")
-        print(f"API request {conf['api']['url']}{path}")
+        #print(f"SERVER CONFIG {cstr}")
+        print(f"API GET {conf['api']['url']}{path}")
         r = requests.get(
             f"{conf['api']['url']}{path}", {
                 "Cache-Control": "no-cache",
